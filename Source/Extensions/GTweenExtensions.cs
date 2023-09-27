@@ -9,7 +9,7 @@ namespace GTweens.Extensions
 {
     public static class GTweenExtensions
     {
-        public static GTween To(
+        public static GTween Tween(
             Tweener<int>.Getter currValueGetter, 
             Tweener<int>.Setter setter,
             Tweener<int>.Getter finalValueGetter, 
@@ -22,7 +22,7 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
 
-        public static GTween To(
+        public static GTween Tween(
             Tweener<float>.Getter currValueGetter, 
             Tweener<float>.Setter setter,
             Tweener<float>.Getter finalValueGetter, 
@@ -35,7 +35,7 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
 
-        public static GTween To(
+        public static GTween Tween(
             Tweener<Vector2>.Getter currValueGetter, 
             Tweener<Vector2>.Setter setter,
             Tweener<Vector2>.Getter finalValueGetter, 
@@ -48,7 +48,7 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
 
-        public static GTween To(
+        public static GTween Tween(
             Tweener<Vector3>.Getter currValueGetter, 
             Tweener<Vector3>.Setter setter,
             Tweener<Vector3>.Getter finalValueGetter, 
@@ -75,7 +75,7 @@ namespace GTweens.Extensions
         //     return tween;
         // }
 
-        public static GTween To(
+        public static GTween Tween(
             Tweener<Vector4>.Getter currValueGetter, 
             Tweener<Vector4>.Setter setter,
             Tweener<Vector4>.Getter finalValueGetter, 
@@ -88,7 +88,7 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
 
-        public static GTween To(
+        public static GTween Tween(
             Tweener<Color>.Getter currValueGetter, 
             Tweener<Color>.Setter setter,
             Tweener<Color>.Getter finalValueGetter, 
@@ -101,7 +101,7 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
 
-        public static GTween To(
+        public static GTween Tween(
             Tweener<Quaternion>.Getter currValueGetter, 
             Tweener<Quaternion>.Setter setter,
             Tweener<Quaternion>.Getter finalValueGetter, 
@@ -114,7 +114,7 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
 
-        public static GTween To(
+        public static GTween Tween(
             Tweener<int>.Getter[] currValueGetter, 
             Tweener<int>.Setter[] setter,
             Tweener<int>.Getter[] finalValueGetter, 
@@ -133,7 +133,7 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
 
-        public static GTween To(
+        public static GTween Tween(
             Tweener<float>.Getter[] currValueGetter, 
             Tweener<float>.Setter[] setter,
             Tweener<float>.Getter[] finalValueGetter, 
@@ -152,7 +152,7 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
 
-        public static GTween To(
+        public static GTween Tween(
             Tweener<Vector2>.Getter[] currValueGetter, 
             Tweener<Vector2>.Setter[] setter,
             Tweener<Vector2>.Getter[] finalValueGetter, 
@@ -171,7 +171,7 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
 
-        public static GTween To(
+        public static GTween Tween(
             Tweener<Vector3>.Getter[] currValueGetter, 
             Tweener<Vector3>.Setter[] setter,
             Tweener<Vector3>.Getter[] finalValueGetter, 
@@ -190,7 +190,7 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
 
-        public static GTween To(
+        public static GTween Tween(
             Tweener<Vector4>.Getter[] currValueGetter, 
             Tweener<Vector4>.Setter[] setter,
             Tweener<Vector4>.Getter[] finalValueGetter, 
@@ -209,7 +209,7 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
         
-        public static GTween To(
+        public static GTween Tween(
             Tweener<Color>.Getter[] currValueGetter, 
             Tweener<Color>.Setter[] setter,
             Tweener<Color>.Getter[] finalValueGetter, 
@@ -228,14 +228,14 @@ namespace GTweens.Extensions
             return new GTween(tweenBehaviour);
         }
         
-        public static GTween To(
+        public static GTween Tween(
             int initialValue, 
             int finalValue, 
             Tweener<int>.Setter setter,
             float duration
         )
         {
-            return To(
+            return Tween(
                 () => initialValue,
                 setter,
                 () => finalValue,
@@ -244,14 +244,14 @@ namespace GTweens.Extensions
             );
         }
         
-        public static GTween To(
+        public static GTween Tween(
             float initialValue, 
             float finalValue, 
             Tweener<float>.Setter setter,
             float duration
         )
         {
-            return To(
+            return Tween(
                 () => initialValue,
                 setter,
                 () => finalValue,

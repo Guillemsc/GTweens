@@ -43,6 +43,6 @@ public sealed class GroupTweenBehaviourTests
     
     GTween CreateTweenWithDuration(float duration)
     {
-        return GTweenExtensions.To(0, 1, _ => { }, duration);
+        return GTweenExtensions.Tween(0, 1, _ => { }, duration);
     }
 }

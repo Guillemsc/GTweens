@@ -1,4 +1,5 @@
-﻿using GTweens.TweenBehaviours;
+﻿using System;
+using GTweens.TweenBehaviours;
 using GTweens.Tweens;
 using GUtils.Extensions;
 
@@ -54,6 +55,23 @@ public sealed class GTweenSequenceBuilder
         _groupTweenBehaviour.Add(gTween);
 
         _sequenceTweenBehaviour.Add(new GTween(_groupTweenBehaviour));
+        
+        return this;
+    }
+
+    public GTweenSequenceBuilder AppendCallback(Action callback, bool callIfCompletingInstantly = true)
+    {
+        CallbackTweenBehaviour callbackTweenBehaviour = new(callback, callIfCompletingInstantly);
+        Append(new GTween(callbackTweenBehaviour));
+        
+        return this;
+    }
+    
+    public GTweenSequenceBuilder JoinCallback(Action callback, bool callIfCompletingInstantly = true)
+    {
+        CallbackTweenBehaviour callbackTweenBehaviour = new(callback, callIfCompletingInstantly);
+        Join(new GTween(callbackTweenBehaviour));
+        
         return this;
     }
 
