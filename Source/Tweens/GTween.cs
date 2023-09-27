@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
 using GTweens.Easings;
 using GTweens.Enums;
 using GTweens.TweenBehaviours;
@@ -9,13 +7,13 @@ namespace GTweens.Tweens
 {
     public sealed class GTween 
     {
-        public event Action<float>? OnTimeScaleChanged;
-        public event Action? OnStart;
-        public event Action? OnLoop;
-        public event Action? OnReset;
-        public event Action? OnComplete;
-        public event Action? OnKill;
-        public event Action? OnCompleteOrKill;
+        public event Action? OnStartAction;
+        public event Action? OnLoopAction;
+        public event Action? OnResetAction;
+        public event Action? OnCompleteAction;
+        public event Action? OnKillAction;
+        public event Action? OnCompleteOrKillAction;
+        public event Action<float>? OnTimeScaleChangedAction;
         
         public ITweenBehaviour Behaviour { get; }
         public float TimeScale { get; private set; } = 1;
@@ -54,7 +52,7 @@ namespace GTweens.Tweens
 
             Behaviour.Start(isCompletingInstantly);
    
-            OnStart?.Invoke();
+            OnStartAction?.Invoke();
         }
         
         public void Tick(float deltaTime)
@@ -112,8 +110,8 @@ namespace GTweens.Tweens
 
             Behaviour.Kill();
 
-            OnKill?.Invoke();
-            OnCompleteOrKill?.Invoke();
+            OnKillAction?.Invoke();
+            OnCompleteOrKillAction?.Invoke();
         }
 
         public void Reset(bool kill, ResetMode resetMode = ResetMode.InitialValues)
@@ -129,7 +127,7 @@ namespace GTweens.Tweens
 
             Behaviour.Reset(kill, resetMode);
 
-            OnReset?.Invoke();
+            OnResetAction?.Invoke();
         }
 
         public float GetDuration()
@@ -154,22 +152,14 @@ namespace GTweens.Tweens
         
         public GTween SetTimeScale(float timeScale)
         {
-            if(TimeScale == timeScale)
-            {
-                return this;
-            }
-
             TimeScale = timeScale;
-            
-            OnTimeScaleChanged?.Invoke(timeScale);
-
+            OnTimeScaleChangedAction?.Invoke(timeScale);
             return this;
         }
 
         public GTween SetEasing(EasingDelegate easingFunction)
         {
             Behaviour.SetEasing(easingFunction);
-
             return this;
         }
 
@@ -182,13 +172,54 @@ namespace GTweens.Tweens
         {
             Loops = Math.Max(loops, 0);
             LoopResetMode = resetMode;
-
             return this;
         }
         
         public GTween SetInfiniteLoops(ResetMode resetMode = ResetMode.InitialValues)
         {
             return SetLoops(int.MaxValue, resetMode);
+        }
+        
+        public GTween OnStart(Action action)
+        {
+            OnStartAction += action;
+            return this;
+        }
+        
+        public GTween OnLoop(Action action)
+        {
+            OnLoopAction += action;
+            return this;
+        }
+        
+        public GTween OnReset(Action action)
+        {
+            OnResetAction += action;
+            return this;
+        }
+        
+        public GTween OnComplete(Action action)
+        {
+            OnCompleteAction += action;
+            return this;
+        }
+        
+        public GTween OnKill(Action action)
+        {
+            OnKillAction += action;
+            return this;
+        }
+        
+        public GTween OnCompleteOrKill(Action action)
+        {
+            OnCompleteOrKillAction += action;
+            return this;
+        }
+        
+        public GTween OnTimeScaleChanged(Action<float> action)
+        {
+            OnTimeScaleChangedAction += action;
+            return this;
         }
         
         void Loop(ResetMode loopResetMode)
@@ -206,7 +237,7 @@ namespace GTweens.Tweens
 
             Start();
 
-            OnLoop?.Invoke();
+            OnLoopAction?.Invoke();
         }
 
         void MarkFinished()
@@ -222,8 +253,8 @@ namespace GTweens.Tweens
 
             Behaviour.Complete();
 
-            OnComplete?.Invoke();
-            OnCompleteOrKill?.Invoke();
+            OnCompleteAction?.Invoke();
+            OnCompleteOrKillAction?.Invoke();
         }
     }
 }
