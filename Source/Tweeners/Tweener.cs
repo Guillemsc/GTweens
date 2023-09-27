@@ -2,6 +2,7 @@
 using GTweens.Delegates;
 using GTweens.Easings;
 using GTweens.Enums;
+using GTweens.Extensions;
 using GTweens.Interpolators;
 
 namespace GTweens.Tweeners
@@ -142,9 +143,14 @@ namespace GTweens.Tweeners
 
             if (Elapsed < Duration)
             {
-                float timeNormalized = Elapsed / Duration;
+                float timeNormalized = MathExtensions.SafeDivide(Elapsed, Duration);
 
-                _currentValue = _interpolator.Evaluate(_initialValue, _finalValue, timeNormalized, _easingFunction);
+                _currentValue = _interpolator.Evaluate(
+                    _initialValue,
+                    _finalValue,
+                    timeNormalized,
+                    _easingFunction
+                );
 
                 _setter(_currentValue);
             }
@@ -164,8 +170,13 @@ namespace GTweens.Tweeners
             }
             
             GetFirstTimeValues();
-            
-            T newValue = _interpolator.Evaluate(_initialValue, _finalValue, 1.0f, _easingFunction);
+
+            T newValue = _interpolator.Evaluate(
+                _initialValue,
+                _finalValue,
+                1.0f,
+                _easingFunction
+            );
 
             _setter(newValue);
 

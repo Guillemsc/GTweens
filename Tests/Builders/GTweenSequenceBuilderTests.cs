@@ -29,6 +29,13 @@ public sealed class GTweenSequenceBuilderTests
         Assert.IsTrue(baseSequenceTweenBehaviour.Tweens[0].Behaviour is not GroupTweenBehaviour);
         Assert.IsTrue(baseSequenceTweenBehaviour.Tweens[1].Behaviour is GroupTweenBehaviour);
         Assert.IsTrue(baseSequenceTweenBehaviour.Tweens[2].Behaviour is not GroupTweenBehaviour);
+        
+        if (baseSequenceTweenBehaviour.Tweens[1].Behaviour is not GroupTweenBehaviour groupTweenBehaviour)
+        {
+            return;
+        }
+        
+        Assert.IsTrue(groupTweenBehaviour.Tweens.Count == 2);
     }
     
     GTween CreateTweenWithDuration(float duration)

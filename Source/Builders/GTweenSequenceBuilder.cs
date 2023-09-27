@@ -74,6 +74,22 @@ public sealed class GTweenSequenceBuilder
         
         return this;
     }
+    
+    public GTweenSequenceBuilder AppendTime(float timeSeconds)
+    {
+        WaitTimeTweenBehaviour timeTweenBehaviour = new(timeSeconds);
+        Append(new GTween(timeTweenBehaviour));
+        
+        return this;
+    }
+    
+    public GTweenSequenceBuilder JoinTime(float timeSeconds)
+    {
+        WaitTimeTweenBehaviour timeTweenBehaviour = new(timeSeconds);
+        Join(new GTween(timeTweenBehaviour));
+        
+        return this;
+    }
 
     public GTween Build() => _gTween;
 }

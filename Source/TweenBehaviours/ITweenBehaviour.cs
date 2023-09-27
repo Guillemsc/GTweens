@@ -14,7 +14,6 @@ public interface ITweenBehaviour
     void Kill();
     void Complete();
     void Reset(bool kill, ResetMode loopResetMode);
-    void Loop(ResetMode loopResetMode);
 
     void SetEasing(EasingDelegate easingFunction);
     

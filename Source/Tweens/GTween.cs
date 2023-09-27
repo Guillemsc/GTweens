@@ -16,8 +16,7 @@ namespace GTweens.Tweens
         public event Action? OnComplete;
         public event Action? OnKill;
         public event Action? OnCompleteOrKill;
-
-        public EasingDelegate EasingFunction { get; } = PresetEasingDelegateFactory.GetEaseDelegate(Easing.Linear);
+        
         public ITweenBehaviour Behaviour { get; }
         public float TimeScale { get; private set; } = 1;
 
@@ -54,10 +53,10 @@ namespace GTweens.Tweens
             _loopsRemaining = Loops;
 
             Behaviour.Start(isCompletingInstantly);
-            
+   
             OnStart?.Invoke();
         }
-
+        
         public void Tick(float deltaTime)
         {
             if (!IsPlaying)
@@ -153,32 +152,43 @@ namespace GTweens.Tweens
             return Behaviour.GetElapsed();
         }
         
-        public void SetTimeScale(float timeScale)
+        public GTween SetTimeScale(float timeScale)
         {
             if(TimeScale == timeScale)
             {
-                return;
+                return this;
             }
 
             TimeScale = timeScale;
             
             OnTimeScaleChanged?.Invoke(timeScale);
+
+            return this;
         }
 
-        public void SetEasing(EasingDelegate easingFunction)
+        public GTween SetEasing(EasingDelegate easingFunction)
         {
             Behaviour.SetEasing(easingFunction);
+
+            return this;
         }
 
-        public void SetEasing(Easing easing)
+        public GTween SetEasing(Easing easing)
         {
-            SetEasing(PresetEasingDelegateFactory.GetEaseDelegate(easing));
+            return SetEasing(PresetEasingDelegateFactory.GetEaseDelegate(easing));
         }
 
-        public void SetLoops(int loops, ResetMode resetMode)
+        public GTween SetLoops(int loops, ResetMode resetMode = ResetMode.InitialValues)
         {
             Loops = Math.Max(loops, 0);
             LoopResetMode = resetMode;
+
+            return this;
+        }
+        
+        public GTween SetInfiniteLoops(ResetMode resetMode = ResetMode.InitialValues)
+        {
+            return SetLoops(int.MaxValue, resetMode);
         }
         
         void Loop(ResetMode loopResetMode)

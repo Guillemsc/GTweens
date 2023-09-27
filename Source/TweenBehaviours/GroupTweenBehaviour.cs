@@ -8,6 +8,8 @@ namespace GTweens.TweenBehaviours
 {
     public sealed class GroupTweenBehaviour : TweenBehaviour
     {
+        public IReadOnlyList<GTween> Tweens => _tweens;
+        
         readonly List<GTween> _tweens = new();
         readonly List<GTween> _playingTweens = new();
         
@@ -81,11 +83,6 @@ namespace GTweens.TweenBehaviours
             }
             
             MarkUnfinished();
-        }
-
-        public override void Loop(ResetMode loopResetMode)
-        {
-            StartTweens(isCompletingInstantly: false);
         }
         
         public override void SetEasing(EasingDelegate easingFunction)

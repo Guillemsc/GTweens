@@ -1,4 +1,5 @@
 ﻿using System;
+using GTweens.Enums;
 
 namespace GTweens.TweenBehaviours
 {
@@ -23,6 +24,11 @@ namespace GTweens.TweenBehaviours
             }
 
             MarkFinished();
+        }
+
+        public override void Reset(bool kill, ResetMode loopResetMode)
+        {
+            MarkUnfinished();
         }
 
         public override float GetDuration() => 0f;

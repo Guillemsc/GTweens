@@ -74,13 +74,10 @@ namespace GTweens.TweenBehaviours
 
                 tweener.Reset(resetMode);
             }
+            
+            MarkUnfinished();
         }
-
-        public override void Loop(ResetMode loopResetMode)
-        {
-            StartTweeners();
-        }
-
+        
         public override void SetEasing(EasingDelegate easingFunction)
         {
             foreach (ITweener tweener in _tweeners)

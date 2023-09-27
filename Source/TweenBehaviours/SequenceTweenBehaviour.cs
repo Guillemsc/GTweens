@@ -96,11 +96,6 @@ namespace GTweens.TweenBehaviours
             MarkUnfinished();
         }
 
-        public override void Loop(ResetMode loopResetMode)
-        {
-            StartTweens(isCompletingInstantly: false);
-        }
-
         public override void SetEasing(EasingDelegate easingFunction)
         {
             foreach (GTween tween in _tweens)
@@ -156,7 +151,19 @@ namespace GTweens.TweenBehaviours
         
         public void Remove(GTween gTween)
         {
-            _tweens.Remove(gTween);
+            if (gTween.IsPlayingOrCompleted())
+            {
+                return;
+            }
+            
+            bool found = _tweens.Remove(gTween);
+
+            if (!found)
+            {
+                return;
+            }
+
+            gTween.IsNested = false;
             
             _durationCalculated = false;
         }

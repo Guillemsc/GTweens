@@ -16,7 +16,6 @@ public abstract class TweenBehaviour : ITweenBehaviour
     public virtual void Kill() { }
     public virtual void Complete() { }
     public virtual void Reset(bool kill, ResetMode loopResetMode) { }
-    public virtual void Loop(ResetMode loopResetMode) { }
     public virtual void SetEasing(EasingDelegate easingFunction) { }
 
     public bool GetFinished() => _finished;
