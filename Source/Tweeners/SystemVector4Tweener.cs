@@ -9,14 +9,14 @@ namespace GTweens.Tweeners
         public SystemVector4Tweener(
             Getter currValueGetter,
             Setter setter,
-            Getter finalValueGetter,
+            Vector4 to,
             float duration,
             ValidationDelegates.Validation validation
         )
             : base(
                 currValueGetter,
                 setter,
-                finalValueGetter,
+                to,
                 duration,
                 SystemVector4Interpolator.Instance,
                 validation

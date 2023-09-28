@@ -9,13 +9,13 @@ namespace GTweens.Tweeners
         public SystemColorTweener(
             Getter currValueGetter, 
             Setter setter, 
-            Getter finalValueGetter, 
+            Color to, 
             float duration, 
             ValidationDelegates.Validation validation
             )
             : base(currValueGetter, 
                   setter, 
-                  finalValueGetter, 
+                  to, 
                   duration,
                   SystemColorInterpolator.Instance, 
                   validation

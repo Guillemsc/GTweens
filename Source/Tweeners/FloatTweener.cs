@@ -8,14 +8,14 @@ namespace GTweens.Tweeners
         public FloatTweener(
             Getter currentValueGetter, 
             Setter setter, 
-            Getter finalValueGetter, 
+            float to, 
             float duration, 
             ValidationDelegates.Validation validation
             )
             : base(
                   currentValueGetter, 
                   setter, 
-                  finalValueGetter, 
+                  to, 
                   duration,
                   FloatInterpolator.Instance, 
                   validation

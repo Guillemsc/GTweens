@@ -8,14 +8,14 @@ namespace GTweens.Tweeners
         internal IntTweener(
             Getter currValueGetter, 
             Setter setter, 
-            Getter finalValueGetter, 
+            int to, 
             float duration, 
             ValidationDelegates.Validation validation
             )
             : base(
                   currValueGetter, 
                   setter, 
-                  finalValueGetter, 
+                  to, 
                   duration,
                   IntInterpolator.Instance, 
                   validation

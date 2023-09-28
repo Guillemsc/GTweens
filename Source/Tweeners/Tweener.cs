@@ -20,16 +20,15 @@ namespace GTweens.Tweeners
         public float Duration { get; }
         public float Elapsed { get; private set; }
         
-        readonly Getter _currentValueGetter;
+        readonly Getter _getter;
         readonly Setter _setter;
-        readonly Getter _finalValueGetter;
+        readonly T _to;
         readonly ValidationDelegates.Validation _validation;
         
         readonly IInterpolator<T> _interpolator;
 
         bool _hasFirstTimeValues;
         T _firstTimeInitialValue = default!;
-        T _firstTimeFinalValue = default!;
 
         T _initialValue = default!;
         T _finalValue = default!;
@@ -38,17 +37,17 @@ namespace GTweens.Tweeners
         EasingDelegate _easingFunction = PresetEasingDelegateFactory.GetEaseDelegate(Easing.Linear);
 
         public Tweener(
-            Getter currentValueGetter, 
+            Getter getter, 
             Setter setter, 
-            Getter finalValueGetter, 
+            T to, 
             float duration, 
             IInterpolator<T> interpolator,
             ValidationDelegates.Validation validation
             )
         {
-            _currentValueGetter = currentValueGetter;
+            _getter = getter;
             _setter = setter;
-            _finalValueGetter = finalValueGetter;
+            _to = to;
             _interpolator = interpolator;
             _validation = validation;
             
@@ -76,7 +75,7 @@ namespace GTweens.Tweeners
                 return;
             }
 
-            _initialValue = _currentValueGetter.Invoke();
+            _initialValue = _getter.Invoke();
 
             GetFirstTimeValues();
 
@@ -105,20 +104,20 @@ namespace GTweens.Tweeners
                 case ResetMode.InitialValues:
                     {
                         _setter(_firstTimeInitialValue);
-                        _finalValue = _firstTimeFinalValue;
+                        _finalValue = _to;
                     }
                     break;
 
                 case ResetMode.IncrementalValues:
                     {
-                        T difference = _interpolator.Subtract(_firstTimeInitialValue, _firstTimeFinalValue);
+                        T difference = _interpolator.Subtract(_firstTimeInitialValue, _to);
                         _finalValue = _interpolator.Add(_currentValue, difference);
                     }
                     break;
 
                 case ResetMode.CurrentValues:
                     {
-                        _finalValue = _firstTimeFinalValue;
+                        _finalValue = _to;
                     }
                     break;
             }
@@ -223,10 +222,9 @@ namespace GTweens.Tweeners
             }
 
             _hasFirstTimeValues = true;
-            
-            _finalValue = _finalValueGetter.Invoke();
+
+            _finalValue = _to;
             _firstTimeInitialValue = _initialValue;
-            _firstTimeFinalValue = _finalValue;
         }
     }
 }

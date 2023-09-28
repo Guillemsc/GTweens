@@ -9,14 +9,14 @@ namespace GTweens.Tweeners
         public SystemQuaternionTweener(
             Getter currValueGetter,
             Setter setter,
-            Getter finalValueGetter,
+            Quaternion to,
             float duration,
             ValidationDelegates.Validation validation
             )
             : base(
                   currValueGetter,
                   setter,
-                  finalValueGetter,
+                  to,
                   duration,
                   SystemQuaternionInterpolator.Instance,
                   validation
