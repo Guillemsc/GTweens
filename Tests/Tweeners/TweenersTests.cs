@@ -1,4 +1,6 @@
-﻿using GTweens.Enums;
+﻿#if GTWEENS_TESTS
+
+using GTweens.Enums;
 using GTweens.Tweeners;
 using NUnit.Framework;
 
@@ -103,3 +105,5 @@ public sealed class TweenersTests
         Assert.AreEqual(0, value);
     }
 }
+
+#endif

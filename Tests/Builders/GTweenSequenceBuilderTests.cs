@@ -1,4 +1,6 @@
-﻿using GTweens.Builders;
+﻿#if GTWEENS_TESTS
+
+using GTweens.Builders;
 using GTweens.Extensions;
 using GTweens.TweenBehaviours;
 using GTweens.Tweens;
@@ -43,3 +45,5 @@ public sealed class GTweenSequenceBuilderTests
         return GTweenExtensions.Tween(0, 1, _ => { }, duration);
     }
 }
+
+#endif

@@ -1,4 +1,6 @@
-﻿using GTweens.Extensions;
+﻿#if GTWEENS_TESTS
+
+using GTweens.Extensions;
 using GTweens.Tweens;
 using NUnit.Framework;
 
@@ -44,3 +46,5 @@ public sealed class TweenTests
         Assert.IsTrue(tween.IsKilled);
     }
 }
+
+#endif

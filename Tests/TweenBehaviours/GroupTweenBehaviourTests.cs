@@ -1,4 +1,6 @@
-﻿using GTweens.Extensions;
+﻿#if GTWEENS_TESTS
+
+using GTweens.Extensions;
 using GTweens.TweenBehaviours;
 using GTweens.Tweens;
 using NUnit.Framework;
@@ -46,3 +48,5 @@ public sealed class GroupTweenBehaviourTests
         return GTweenExtensions.Tween(0, 1, _ => { }, duration);
     }
 }
+
+#endif
