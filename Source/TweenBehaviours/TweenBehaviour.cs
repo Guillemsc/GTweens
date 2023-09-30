@@ -7,6 +7,11 @@ public abstract class TweenBehaviour : ITweenBehaviour
 {
     bool _finished;
     
+    public bool GetFinished() => _finished;
+
+    protected void MarkFinished() => _finished = true;
+    protected void MarkUnfinished() => _finished = false;
+    
     public abstract float GetDuration();
     public abstract float GetElapsed();
     public virtual bool GetLoopable() => true;
@@ -17,9 +22,4 @@ public abstract class TweenBehaviour : ITweenBehaviour
     public virtual void Complete() { }
     public virtual void Reset(bool kill, ResetMode loopResetMode) { }
     public virtual void SetEasing(EasingDelegate easingFunction) { }
-
-    public bool GetFinished() => _finished;
-
-    protected void MarkFinished() => _finished = true;
-    protected void MarkUnfinished() => _finished = false;
 }
