@@ -13,19 +13,5 @@ namespace GTweens.Extensions
                 (int)(b * 255f)
             );
         }
-        
-        // public static Color ChangeAlpha(Color color, float alpha)
-        // {
-        //     color.A = alpha;
-        //
-        //     return color;
-        // }
-        //
-        // public static Color ChangeColorKeepingAlpha(Color color, Color alphaToKeep)
-        // {
-        //     color.A = alphaToKeep.A;
-        //
-        //     return color;
-        // }
     }
 }

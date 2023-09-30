@@ -1,9 +1,12 @@
 ﻿using System.Drawing;
 using System.Numerics;
+using System.Threading;
+using System.Threading.Tasks;
 using GTweens.Delegates;
 using GTweens.TweenBehaviours;
 using GTweens.Tweeners;
 using GTweens.Tweens;
+using GTweensGodot.Extensions;
 
 namespace GTweens.Extensions
 {
@@ -184,6 +187,16 @@ namespace GTweens.Extensions
                 ValidationExtensions.AlwaysValid
             );
         }
+
+        public static GTween TweenTimeScale(this GTween target, float to, float duration)
+        {
+            return Tween(
+                () => target.TimeScale,
+                current => target.SetTimeScale(current), 
+                to, 
+                duration
+            );
+        }
         
         public static bool IsPlayingOrCompleted(this GTween gTween)
         {
@@ -193,6 +206,32 @@ namespace GTweens.Extensions
         public static bool IsPlayingOrCompletedOrNested(this GTween gTween)
         {
             return gTween.IsPlaying || gTween.IsCompleted || gTween.IsNested;
+        }
+        
+        public static Task AwaitCompleteOrKill(this GTween gTween, CancellationToken cancellationToken)
+        {
+            TaskCompletionSource taskCompletionSource = new();
+
+            if (!gTween.IsPlaying)
+            {
+                return Task.CompletedTask;
+            }
+
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return Task.CompletedTask;
+            }
+
+            void OnCompleteOrKill()
+            {
+                gTween.OnCompleteOrKillAction -= OnCompleteOrKill;
+                taskCompletionSource.TrySetResult();
+            }
+
+            cancellationToken.Register(OnCompleteOrKill);
+            gTween.OnCompleteOrKill(OnCompleteOrKill);
+            
+            return taskCompletionSource.Task;
         }
     }
 }

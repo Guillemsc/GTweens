@@ -62,7 +62,9 @@ namespace GTweens.Tweens
                 return;
             }
 
-            Behaviour.Tick(deltaTime);
+            float deltaTimeWithTimeScale = TimeScale * deltaTime;
+            
+            Behaviour.Tick(deltaTimeWithTimeScale);
 
             bool isFinished = Behaviour.GetFinished();
 
@@ -175,7 +177,7 @@ namespace GTweens.Tweens
             return this;
         }
         
-        public GTween SetInfiniteLoops(ResetMode resetMode = ResetMode.InitialValues)
+        public GTween SetMaxLoops(ResetMode resetMode = ResetMode.InitialValues)
         {
             return SetLoops(int.MaxValue, resetMode);
         }
