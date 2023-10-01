@@ -58,7 +58,7 @@ GTween tween = GTweenExtensions.Tween(
 ```
 
 ### Tweens context
-Tweens require a system that updates them. In GTweens, this system is referred to as a `GTweensContext`. 
+Tweens require a system that updates them every frame. In GTweens, this system is referred to as a `GTweensContext`. 
 Essentially, `GTweensContext` is a class that maintains a list of active tweens and advances their progress collectively when the Tick method is called.
 To set a GTween in motion, it needs to be initiated through the `Play` method provided by the `GTweensContext`. 
 Here's a practical example of how to implement this concept within an application:
