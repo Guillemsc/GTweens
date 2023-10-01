@@ -1,7 +1,5 @@
 ![LogoWide-2](https://github.com/Guillemsc/GTweens/assets/17142208/ffeede41-5f4a-456f-8cd1-b74e2a26710a)
 
-**Still in development, not ready to use.**
-
 GTweens is a lightweight and versatile tweening library for C#. 
 This library simplifies the process of creating animations and transitions in your projects, allowing you to bring your game elements to life with ease.
 
