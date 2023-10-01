@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using GTweens.Tweens;
 
@@ -7,14 +6,14 @@ namespace GTweens.Contexts
 {
     public sealed class GTweensContext 
     {
+        public float TimeScale { get; set; } = 1f;
+        public float TickDurationMs { get; private set; } 
+        
         readonly List<GTween> _aliveTweens = new();
         readonly List<GTween> _tweensToAdd = new();
         readonly List<GTween> _tweensToRemove = new();
 
         readonly Stopwatch _updateStopwatch = new();
-
-        public float TimeScale { get; set; } = 1f;
-        public float TickDurationMs { get; private set; } 
         
         public void Play(GTween gTween)
         {

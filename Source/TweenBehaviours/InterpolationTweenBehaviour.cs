@@ -47,6 +47,8 @@ namespace GTweens.TweenBehaviours
             }
 
             _playingTweeners.Clear();
+            
+            MarkFinished();
         }
 
         public override void Complete()
