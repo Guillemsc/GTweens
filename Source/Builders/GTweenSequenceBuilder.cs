@@ -90,5 +90,23 @@ public sealed class GTweenSequenceBuilder
         return this;
     }
 
+    public GTweenSequenceBuilder AppendSequence(Action<GTweenSequenceBuilder> createSequence)
+    {
+        GTweenSequenceBuilder sequenceBuilder = New();
+        createSequence.Invoke(sequenceBuilder);
+        Append(sequenceBuilder.Build());
+        
+        return this;
+    }
+    
+    public GTweenSequenceBuilder JoinSequence(Action<GTweenSequenceBuilder> createSequence)
+    {
+        GTweenSequenceBuilder sequenceBuilder = New();
+        createSequence.Invoke(sequenceBuilder);
+        Join(sequenceBuilder.Build());
+        
+        return this;
+    }
+
     public GTween Build() => _gTween;
 }

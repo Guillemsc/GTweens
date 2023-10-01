@@ -237,6 +237,8 @@ namespace GTweens.Tweens
 
             Reset(kill: false, loopResetMode);
 
+            IsPlaying = false;
+
             Start();
 
             OnLoopAction?.Invoke();
