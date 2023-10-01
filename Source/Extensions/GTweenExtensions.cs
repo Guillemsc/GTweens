@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
 using System.Numerics;
+using System.Threading;
+using System.Threading.Tasks;
 using GTweens.Delegates;
 using GTweens.TweenBehaviours;
 using GTweens.Tweeners;
