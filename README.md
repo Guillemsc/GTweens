@@ -6,76 +6,9 @@ GTweens is a lightweight and versatile tweening library for C#.
 This library simplifies the process of creating animations and transitions in your projects, allowing you to bring your game elements to life with ease.
 
 ## 🤜 Features
-- **Simple API**: GTweens-Godot provides an intuitive and easy-to-use API with C# extension methods.
-    ```csharp
-    public partial class TweenExample : Node
-    {
-        [Export] public Node2D Target;
-		
-        public override void _Ready()
-        {
-            Target.TweenPosition(new Vector2(100, 0), 3)
-                .SetEasing(Easing.InOutCubic)
-                .Play();
-        }
-    }
-    ```
-
 - **Sequencing**: Easily chain multiple tweens together to create complex sequences of animations.
-    ```csharp
-    public partial class PlayTweenSequenceExample : Node
-    {
-        [Export] public Node2D Target;
-		
-        public override void _Ready()
-        {
-            GTween tween = GTweenSequenceBuilder.New()
-                .Append(Target.TweenPositionX(100f, 0.5f))
-                    .Join(Target.TweenScale(new Vector2(2f, 2f), 1f))
-                .AppendTime(0.5f)
-                    .JoinCallback(() => GD.Print("I'm waiting some time!"))
-                .Append(Target.TweenPositionX(0f, 1f))
-                .AppendCallback(() => GD.Print("I'm finished!"))
-                .Build();
-
-            tween.SetEasing(Easing.InOutCubic);
-            tween.Play();
-        }
-    }
-    ```
-
-- **Versatile Easing Functions**: Choose from a variety of easing functions to achieve different animation effects, including linear, ease-in, ease-out, and custom curves.
-    ```csharp
-    public partial class EasingExample : Node
-    {
-        [Export] public Node2D Target;
-        [Export] public Easing Easing;
-		
-        public override void _Ready()
-        {
-            GTween tween = Target.TweenPositionX(100, 3);
-            tween.SetEasing(Easing);
-            tween.Play();
-        }
-    }
-    ```
-  
+- **Versatile Easing Functions**: Choose from a variety of easing functions to achieve different animation effects, including linear, ease-in, ease-out, etc.  
 - **Looping**: Create looping animations with a single line of code, and control loop count and behavior.
-    ```csharp
-    public partial class LoopingTweenExample : Node
-    {
-        [Export] public Node2D Target;
-        [Export] public int Loops;
-		
-        public override void _Ready()
-        {
-             GTween tween = Target.TweenPositionX(150, 1);
-             tween.SetLoops(Loops);
-             tween.Play();
-        }
-    }
-    ```
-  
 - **Delays**: Specify delays, allowing precise timing of your animations.
 - **Callbacks**: Attach callbacks to tweens for event handling at various points in the animation timeline.
 
@@ -135,12 +68,12 @@ To create sequences, you need to use the helper `GTweenSequenceBuilder`.
 - Finally you call `Build()` to get the generated sequence Tween.
 ```csharp
  GTween tween = GTweenSequenceBuilder.New()
-    .Append(Target.TweenPositionX(100, 0.5f))
-        .Join(Target.TweenScale(new Vector2(2, 2), 1))
-    .Append(Target.TweenPositionY(100, 1))
+    .Append(SomeTween)
+        .Join(SomeOtherTween)
+    .Append(SomeOtherOtherTween)
     .AppendTime(0.5f)
-    .Append(Target.TweenPositionX(0, 1))
-    .AppendCallback(() => GD.Print("I'm finished!"))
+    .Append(AnotherTween)
+    .AppendCallback(() => Console.WriteLine("I'm finished!"))
     .Build();
         
 tween.SetEasing(Easing.InOutCubic);
