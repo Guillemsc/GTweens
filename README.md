@@ -57,6 +57,45 @@ GTween tween = GTweenExtensions.Tween(
 );
 ```
 
+### Tweens context
+Tweens require a system that updates them. In GTweens, this system is referred to as a `GTweensContext`. 
+Essentially, `GTweensContext` is a class that maintains a list of active tweens and advances their progress collectively when the Tick method is called.
+To set a GTween in motion, it needs to be initiated through the `Play` method provided by the `GTweensContext`. 
+Here's a practical example of how to implement this concept within an application:
+```csharp
+class MyApplication
+{
+    // We need a single instance of a GTweensContext
+    readonly GTweensContext _gTweensContext = new();
+
+    void UpdateApplication(float frameDeltaTime)
+    {
+        // With out aplication update, we tick the context with the frame delta time
+        _gTweensContext.Tick(frameDeltaTime)
+    }
+
+    void PlaySomeTween()
+    {
+        // We create a tween
+        GTween tween = GTweenExtensions.Tween(
+            () => Target.SomeFloat, // Getter
+            x => Target.SomeFloat = x, // Setter
+            100f, // To
+            1 // Duration
+        );
+
+        // We play the tween with the context
+        _gTweensContext.Play(tween);
+    }
+}
+```
+In this example:
+- We establish a single instance of GTweensContext, _gTweensContext, within the MyApplication class.
+- The UpdateApplication function is responsible for advancing the tweens within the context using the provided frameDeltaTime as the time increment.
+- To initiate a new tween, we use the GTweenExtensions.Tween method, specifying the getter, setter, target value, and duration.
+- Finally, we play the tween by adding it to the context using _gTweensContext.Play(tween).
+This approach allows for the management and synchronization of tweens within the application using a GTweensContext.
+
 ### Sequences
 Sequences are a combination of tweens that get animated as a group. 
 Sequences can be contained inside other sequences without any limit to the depth of the hierarchy.
