@@ -4,9 +4,19 @@ using GTweens.Tweens;
 
 namespace GTweens.Contexts
 {
+    /// <summary>
+    /// Manages and updates a collection of GTweens.
+    /// </summary>
     public sealed class GTweensContext 
     {
+        /// <summary>
+        /// Gets or sets the time scale at which the tweens should play.
+        /// </summary>
         public float TimeScale { get; set; } = 1f;
+        
+        /// <summary>
+        /// Gets the duration of the last tweens tick in milliseconds.
+        /// </summary>
         public float TickDurationMs { get; private set; } 
         
         readonly List<GTween> _aliveTweens = new();
@@ -15,6 +25,10 @@ namespace GTweens.Contexts
 
         readonly Stopwatch _updateStopwatch = new();
         
+        /// <summary>
+        /// Plays a GTween within the context.
+        /// </summary>
+        /// <param name="gTween">The GTween to play.</param>
         public void Play(GTween gTween)
         {
             if(gTween.IsNested)
@@ -35,6 +49,10 @@ namespace GTweens.Contexts
             TryStartTween(gTween);
         }
         
+        /// <summary>
+        /// Updates the context and all managed tweens.
+        /// </summary>
+        /// <param name="deltaTime">The elapsed time since the last update in seconds.</param>
         public void Tick(float deltaTime)
         {
             float scaledDeltaTime = deltaTime * TimeScale;
@@ -75,6 +93,9 @@ namespace GTweens.Contexts
             TickDurationMs = _updateStopwatch.ElapsedMilliseconds;
         }
         
+        /// <summary>
+        /// Clears all tweens from the context.
+        /// </summary>
         public void Clear()
         {
             _aliveTweens.Clear();
