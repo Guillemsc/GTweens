@@ -1,19 +1,27 @@
 ﻿namespace GTweens.Enums
 {
+    /// <summary>
+    /// Specifies different modes for resetting the values of a tween animation.
+    /// </summary>
     public enum ResetMode
     {
         /// <summary>
-        /// Sets the initial values that the tween had when it started playing.
+        /// Resets the values to their initial state, as they were when the tween animation started.
         /// </summary>
         InitialValues,
         
         /// <summary>
-        /// Uses the difference between initial and the final values to increment the new initial and final values.
+        /// Resets the values by using the difference between initial and final values, effectively incrementing the new initial and final values.
         /// </summary>
         IncrementalValues,
         
         /// <summary>
-        /// Leaves the values as they are.
+        /// Each time reverses the animation initial and final values, in a ping-pong fashion.
+        /// </summary> 
+        PingPong,
+        
+        /// <summary>
+        /// Leaves the values unchanged, maintaining their current state.
         /// </summary>
         CurrentValues,
     }

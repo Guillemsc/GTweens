@@ -114,6 +114,12 @@ namespace GTweens.Tweeners
                         _finalValue = _interpolator.Add(_currentValue, difference);
                     }
                     break;
+                
+                case ResetMode.PingPong:
+                    {
+                        _finalValue = _initialValue;
+                    } 
+                    break;
 
                 case ResetMode.CurrentValues:
                     {
