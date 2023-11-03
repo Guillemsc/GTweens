@@ -284,11 +284,13 @@ namespace GTweens.Tweens
             --_loopsRemaining;
 
             Reset(kill: false, loopResetMode);
-
-            IsPlaying = false;
-
-            Start();
-
+            
+            IsPlaying = true;
+            IsCompleted = false;
+            IsKilled = false;
+            
+            Behaviour.Start(false);
+            
             OnLoopAction?.Invoke();
         }
 
