@@ -22,13 +22,14 @@ namespace GTweens.Tweeners
         
         readonly Getter _getter;
         readonly Setter _setter;
-        readonly T _to;
+        readonly Getter _to;
         readonly ValidationDelegates.Validation _validation;
         
         readonly IInterpolator<T> _interpolator;
 
         bool _hasFirstTimeValues;
         T _firstTimeInitialValue = default!;
+        T _firstTimeFinalValue = default!;
 
         T _initialValue = default!;
         T _finalValue = default!;
@@ -39,7 +40,7 @@ namespace GTweens.Tweeners
         public Tweener(
             Getter getter, 
             Setter setter, 
-            T to, 
+            Getter to, 
             float duration, 
             IInterpolator<T> interpolator,
             ValidationDelegates.Validation validation
@@ -104,13 +105,13 @@ namespace GTweens.Tweeners
                 case ResetMode.InitialValues:
                     {
                         _setter(_firstTimeInitialValue);
-                        _finalValue = _to;
+                        _finalValue = _firstTimeFinalValue;
                     }
                     break;
 
                 case ResetMode.IncrementalValues:
                     {
-                        T difference = _interpolator.Subtract(_firstTimeInitialValue, _to);
+                        T difference = _interpolator.Subtract(_firstTimeInitialValue, _firstTimeFinalValue);
                         _finalValue = _interpolator.Add(_currentValue, difference);
                     }
                     break;
@@ -119,12 +120,6 @@ namespace GTweens.Tweeners
                     {
                         _finalValue = _initialValue;
                     } 
-                    break;
-
-                case ResetMode.CurrentValues:
-                    {
-                        _finalValue = _to;
-                    }
                     break;
             }
         }
@@ -229,8 +224,10 @@ namespace GTweens.Tweeners
 
             _hasFirstTimeValues = true;
 
-            _finalValue = _to;
+            _finalValue = _to.Invoke();
+            
             _firstTimeInitialValue = _initialValue;
+            _firstTimeFinalValue = _finalValue;
         }
     }
 }

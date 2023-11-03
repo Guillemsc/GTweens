@@ -14,7 +14,7 @@ namespace GTweens.Extensions
         public static GTween Tween(
             Tweener<int>.Getter getter, 
             Tweener<int>.Setter setter,
-            int to, 
+            Tweener<int>.Getter to, 
             float duration, 
             ValidationDelegates.Validation validation
             )
@@ -28,13 +28,21 @@ namespace GTweens.Extensions
             Tweener<int>.Getter getter, 
             Tweener<int>.Setter setter,
             int to, 
+            float duration,
+            ValidationDelegates.Validation validation
+        ) => Tween(getter, setter, () => to, duration, validation);
+        
+        public static GTween Tween(
+            Tweener<int>.Getter getter, 
+            Tweener<int>.Setter setter,
+            int to, 
             float duration
-        ) => Tween(getter, setter, to, duration, ValidationExtensions.AlwaysValid);
+        ) => Tween(getter, setter, () => to, duration, ValidationExtensions.AlwaysValid);
         
         public static GTween Tween(
             Tweener<float>.Getter getter,
             Tweener<float>.Setter setter,
-            float to,
+            Tweener<float>.Getter to,
             float duration,
             ValidationDelegates.Validation validation
         )
@@ -43,7 +51,15 @@ namespace GTweens.Extensions
             tweenBehaviour.Add(new FloatTweener(getter, setter, to, duration, validation));
             return new GTween(tweenBehaviour);
         }
-
+        
+        public static GTween Tween(
+            Tweener<float>.Getter getter,
+            Tweener<float>.Setter setter,
+            float to,
+            float duration,
+            ValidationDelegates.Validation validation
+        ) => Tween(getter, setter, () => to, duration, validation);
+        
         public static GTween Tween(
             Tweener<float>.Getter getter,
             Tweener<float>.Setter setter,
@@ -54,7 +70,7 @@ namespace GTweens.Extensions
         public static GTween Tween(
             Tweener<Vector2>.Getter getter,
             Tweener<Vector2>.Setter setter,
-            Vector2 to,
+            Tweener<Vector2>.Getter to,
             float duration,
             ValidationDelegates.Validation validation
         )
@@ -68,22 +84,38 @@ namespace GTweens.Extensions
             Tweener<Vector2>.Getter getter,
             Tweener<Vector2>.Setter setter,
             Vector2 to,
+            float duration,
+            ValidationDelegates.Validation validation
+        ) => Tween(getter, setter, () => to, duration, validation);
+        
+        
+        public static GTween Tween(
+            Tweener<Vector2>.Getter getter,
+            Tweener<Vector2>.Setter setter,
+            Vector2 to,
             float duration
         ) => Tween(getter, setter, to, duration, ValidationExtensions.AlwaysValid);
         
-
         public static GTween Tween(
             Tweener<Vector3>.Getter getter, 
             Tweener<Vector3>.Setter setter,
-            Vector3 to, 
+            Tweener<Vector3>.Getter to, 
             float duration, 
             ValidationDelegates.Validation validation
-            )
+        )
         {
             InterpolationTweenBehaviour tweenBehaviour = new InterpolationTweenBehaviour();
             tweenBehaviour.Add(new SystemVector3Tweener(getter, setter, to, duration, validation));
             return new GTween(tweenBehaviour);
         }
+
+        public static GTween Tween(
+            Tweener<Vector3>.Getter getter,
+            Tweener<Vector3>.Setter setter,
+            Vector3 to,
+            float duration,
+            ValidationDelegates.Validation validation
+        ) => Tween(getter, setter, () => to, duration, validation);
         
         public static GTween Tween(
             Tweener<Vector3>.Getter getter, 
@@ -92,19 +124,26 @@ namespace GTweens.Extensions
             float duration
         ) => Tween(getter, setter, to, duration, ValidationExtensions.AlwaysValid);
         
-
         public static GTween Tween(
             Tweener<Vector4>.Getter getter, 
             Tweener<Vector4>.Setter setter,
-            Vector4 to, 
+            Tweener<Vector4>.Getter to, 
             float duration, 
             ValidationDelegates.Validation validation
-            )
+        )
         {
             InterpolationTweenBehaviour tweenBehaviour = new InterpolationTweenBehaviour();
             tweenBehaviour.Add(new SystemVector4Tweener(getter, setter, to, duration, validation));
             return new GTween(tweenBehaviour);
         }
+
+        public static GTween Tween(
+            Tweener<Vector4>.Getter getter,
+            Tweener<Vector4>.Setter setter,
+            Vector4 to,
+            float duration,
+            ValidationDelegates.Validation validation
+        ) => Tween(getter, setter, () => to, duration, validation);
         
         public static GTween Tween(
             Tweener<Vector4>.Getter getter, 
@@ -113,11 +152,10 @@ namespace GTweens.Extensions
             float duration
         ) => Tween(getter, setter, to, duration, ValidationExtensions.AlwaysValid);
 
-
         public static GTween Tween(
             Tweener<Color>.Getter getter,
             Tweener<Color>.Setter setter,
-            Color to,
+            Tweener<Color>.Getter to,
             float duration,
             ValidationDelegates.Validation validation
         )
@@ -126,6 +164,14 @@ namespace GTweens.Extensions
             tweenBehaviour.Add(new SystemColorTweener(getter, setter, to, duration, validation));
             return new GTween(tweenBehaviour);
         }
+
+        public static GTween Tween(
+            Tweener<Color>.Getter getter,
+            Tweener<Color>.Setter setter,
+            Color to,
+            float duration,
+            ValidationDelegates.Validation validation
+        ) => Tween(getter, setter, () => to, duration, validation);
 
         public static GTween Tween(
             Tweener<Color>.Getter getter, 
@@ -137,7 +183,7 @@ namespace GTweens.Extensions
         public static GTween Tween(
             Tweener<Quaternion>.Getter getter,
             Tweener<Quaternion>.Setter setter,
-            Quaternion to,
+            Tweener<Quaternion>.Getter to,
             float duration,
             ValidationDelegates.Validation validation
         )
@@ -146,6 +192,14 @@ namespace GTweens.Extensions
             tweenBehaviour.Add(new SystemQuaternionTweener(getter, setter, to, duration, validation));
             return new GTween(tweenBehaviour);
         }
+        
+        public static GTween Tween(
+            Tweener<Quaternion>.Getter getter,
+            Tweener<Quaternion>.Setter setter,
+            Quaternion to,
+            float duration,
+            ValidationDelegates.Validation validation
+        ) => Tween(getter, setter, () => to, duration, validation);
         
         public static GTween Tween(
             Tweener<Quaternion>.Getter getter,

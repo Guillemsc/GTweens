@@ -8,7 +8,7 @@ public sealed class FloatTweener : Tweener<float>
     public FloatTweener(
         Getter currentValueGetter, 
         Setter setter, 
-        float to, 
+        Getter to, 
         float duration, 
         ValidationDelegates.Validation validation
     )

@@ -9,7 +9,7 @@ namespace GTweens.Tweeners
         public SystemQuaternionTweener(
             Getter currValueGetter,
             Setter setter,
-            Quaternion to,
+            Getter to,
             float duration,
             ValidationDelegates.Validation validation
             )

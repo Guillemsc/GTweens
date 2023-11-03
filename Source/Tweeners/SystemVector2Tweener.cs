@@ -9,7 +9,7 @@ namespace GTweens.Tweeners
         public SystemVector2Tweener(
             Getter currValueGetter, 
             Setter setter, 
-            Vector2 to, 
+            Getter to, 
             float duration, 
             ValidationDelegates.Validation validation
             )

@@ -8,7 +8,7 @@ namespace GTweens.Tweeners
         internal IntTweener(
             Getter currValueGetter, 
             Setter setter, 
-            int to, 
+            Getter to, 
             float duration, 
             ValidationDelegates.Validation validation
             )

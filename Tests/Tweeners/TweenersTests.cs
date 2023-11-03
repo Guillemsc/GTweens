@@ -14,7 +14,7 @@ public sealed class TweenersTests
         ITweener tweener = new IntTweener(
             () => 0,
             _ => { },
-            1,
+            () => 1,
             1f,
             () => true
         );
@@ -35,7 +35,7 @@ public sealed class TweenersTests
         ITweener tweener = new IntTweener(
             () => value,
             newValue => value = newValue,
-            finalValue,
+            () => finalValue,
             1f,
             () => true
         );
@@ -55,7 +55,7 @@ public sealed class TweenersTests
         ITweener tweener = new IntTweener(
             () => value,
             newValue => value = newValue,
-            finalValue,
+            () => finalValue,
             1f,
             () => true
         );
@@ -71,7 +71,7 @@ public sealed class TweenersTests
         ITweener tweener = new IntTweener(
             () => 0,
             _ => { },
-            1,
+            () => 1,
             1f,
             () => true
         );
@@ -93,7 +93,7 @@ public sealed class TweenersTests
         ITweener tweener = new IntTweener(
             () => value,
             newValue => value = newValue,
-            finalValue,
+            () => finalValue,
             1f,
             () => true
         );

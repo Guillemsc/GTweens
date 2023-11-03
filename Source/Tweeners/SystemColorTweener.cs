@@ -9,7 +9,7 @@ namespace GTweens.Tweeners
         public SystemColorTweener(
             Getter currValueGetter, 
             Setter setter, 
-            Color to, 
+            Getter to, 
             float duration, 
             ValidationDelegates.Validation validation
             )
