@@ -1,5 +1,4 @@
-﻿using System;
-using Godot;
+﻿using System.Numerics;
 using GTweens.Enums;
 
 namespace GTweens.Extensions
