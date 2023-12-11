@@ -16,8 +16,8 @@ public sealed class TweenTests
         tween.Start();
         tween.Tick(2f);
         
-        Assert.IsFalse(tween.IsPlaying);
-        Assert.IsTrue(tween.IsCompleted);
+        Assert.That(!tween.IsPlaying);
+        Assert.That(tween.IsCompleted);
     }
     
     [Test]
@@ -30,7 +30,7 @@ public sealed class TweenTests
         
         tween.Complete();
         
-        Assert.AreEqual(value, finalValue);
+        Assert.That(value, Is.EqualTo(finalValue));
     }
     
     [Test]
@@ -41,9 +41,9 @@ public sealed class TweenTests
         tween.Start();
         tween.Kill();
         
-        Assert.IsFalse(tween.IsPlaying);
-        Assert.IsFalse(tween.IsCompleted);
-        Assert.IsTrue(tween.IsKilled);
+        Assert.That(!tween.IsPlaying);
+        Assert.That(!tween.IsCompleted);
+        Assert.That(tween.IsKilled);
     }
 }
 

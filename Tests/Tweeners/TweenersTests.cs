@@ -22,8 +22,8 @@ public sealed class TweenersTests
         tweener.Start();
         tweener.Tick(2f);
         
-        Assert.IsFalse(tweener.IsPlaying);
-        Assert.IsTrue(tweener.IsCompleted);
+        Assert.That(!tweener.IsPlaying);
+        Assert.That(tweener.IsCompleted);
     }
     
     [Test]
@@ -43,7 +43,7 @@ public sealed class TweenersTests
         tweener.Start();
         tweener.Tick(2f);
         
-        Assert.AreEqual(value, finalValue);
+        Assert.That(value, Is.EqualTo(finalValue));
     }
     
     [Test]
@@ -62,7 +62,7 @@ public sealed class TweenersTests
         
         tweener.Complete();
         
-        Assert.AreEqual(finalValue, value);
+        Assert.That(finalValue, Is.EqualTo(value));
     }
     
     [Test]
@@ -79,9 +79,9 @@ public sealed class TweenersTests
         tweener.Start();
         tweener.Kill();
         
-        Assert.IsFalse(tweener.IsPlaying);
-        Assert.IsFalse(tweener.IsCompleted);
-        Assert.IsTrue(tweener.IsKilled);
+        Assert.That(!tweener.IsPlaying);
+        Assert.That(!tweener.IsCompleted);
+        Assert.That(tweener.IsKilled);
     }
     
     [Test]
@@ -102,7 +102,7 @@ public sealed class TweenersTests
         tweener.Tick(2f);
         tweener.Reset(ResetMode.InitialValues);
         
-        Assert.AreEqual(0, value);
+        Assert.That(0, Is.EqualTo(value));
     }
 }
 

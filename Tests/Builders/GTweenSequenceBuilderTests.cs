@@ -20,24 +20,24 @@ public sealed class GTweenSequenceBuilderTests
             .Append(CreateTweenWithDuration(1))
             .Build();
         
-        Assert.IsTrue(tween.Behaviour is SequenceTweenBehaviour);
+        Assert.That(tween.Behaviour is SequenceTweenBehaviour);
 
         if (tween.Behaviour is not SequenceTweenBehaviour baseSequenceTweenBehaviour)
         {
             return;
         }
         
-        Assert.IsTrue(baseSequenceTweenBehaviour.Tweens.Count == 3);
-        Assert.IsTrue(baseSequenceTweenBehaviour.Tweens[0].Behaviour is not GroupTweenBehaviour);
-        Assert.IsTrue(baseSequenceTweenBehaviour.Tweens[1].Behaviour is GroupTweenBehaviour);
-        Assert.IsTrue(baseSequenceTweenBehaviour.Tweens[2].Behaviour is not GroupTweenBehaviour);
+        Assert.That(baseSequenceTweenBehaviour.Tweens.Count == 3);
+        Assert.That(baseSequenceTweenBehaviour.Tweens[0].Behaviour is not GroupTweenBehaviour);
+        Assert.That(baseSequenceTweenBehaviour.Tweens[1].Behaviour is GroupTweenBehaviour);
+        Assert.That(baseSequenceTweenBehaviour.Tweens[2].Behaviour is not GroupTweenBehaviour);
         
         if (baseSequenceTweenBehaviour.Tweens[1].Behaviour is not GroupTweenBehaviour groupTweenBehaviour)
         {
             return;
         }
         
-        Assert.IsTrue(groupTweenBehaviour.Tweens.Count == 2);
+        Assert.That(groupTweenBehaviour.Tweens.Count == 2);
     }
     
     GTween CreateTweenWithDuration(float duration)

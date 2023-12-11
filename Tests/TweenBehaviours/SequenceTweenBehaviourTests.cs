@@ -24,8 +24,8 @@ public sealed class SequenceTweenBehaviourTests
         tween.Tick(4);
         tween.Tick(4);
         
-        Assert.IsFalse(tween.IsPlaying);
-        Assert.IsTrue(tween.IsCompleted);
+        Assert.That(!tween.IsPlaying);
+        Assert.That(tween.IsCompleted);
     }
     
     [Test]
@@ -42,8 +42,8 @@ public sealed class SequenceTweenBehaviourTests
         tween.Tick(3);
         tween.Tick(3);
         
-        Assert.IsTrue(tween.IsPlaying);
-        Assert.IsFalse(tween.IsCompleted);
+        Assert.That(tween.IsPlaying);
+        Assert.That(!tween.IsCompleted);
     }
     
     GTween CreateTweenWithDuration(float duration)
