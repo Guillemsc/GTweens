@@ -19,6 +19,7 @@ namespace GTweens.Tweeners
 
         public float Duration { get; }
         public float Elapsed { get; private set; }
+        public float Remaining => Math.Max(Duration - Elapsed, 0f);
         
         readonly Getter _getter;
         readonly Setter _setter;

@@ -7,6 +7,7 @@ namespace GTweens.Tweeners
     {
         float Duration { get; }
         float Elapsed { get; }
+        float Remaining { get; }
 
         bool IsPlaying { get; }
         bool IsCompleted { get; }

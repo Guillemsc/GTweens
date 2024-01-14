@@ -7,6 +7,7 @@ public interface ITweenBehaviour
 {
     float GetDuration();
     float GetElapsed();
+    float GetRemaining();
     bool GetLoopable();
     
     void Start(bool isCompletingInstantly);

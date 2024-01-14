@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.GameContext.Pause.Datas;
 using GTweens.Easings;
 using GTweens.Enums;
 using GTweens.TweenBehaviours;
@@ -27,6 +28,7 @@ namespace GTweens.Tweens
         public bool IsNested { get; set; }
 
         public bool IsPlaying { get; private set; }
+        public bool IsPaused { get; private set; }
         public bool IsCompleted { get; private set; }
         public bool IsKilled { get; private set; }
         public bool IsCompletedOrKilled => IsCompleted || IsKilled;
@@ -73,6 +75,11 @@ namespace GTweens.Tweens
                 return;
             }
 
+            if (IsPaused)
+            {
+                return;
+            }
+
             float deltaTimeWithTimeScale = TimeScale * deltaTime;
             
             Behaviour.Tick(deltaTimeWithTimeScale);
@@ -94,6 +101,11 @@ namespace GTweens.Tweens
             {
                 MarkFinished();
             }
+        }
+
+        public void SetPaused(bool paused)
+        {
+            IsPaused = paused;
         }
 
         /// <summary>
@@ -152,6 +164,30 @@ namespace GTweens.Tweens
             Behaviour.Reset(kill, resetMode);
 
             OnResetAction?.Invoke();
+        }
+
+        public GTween Simulate(float time)
+        {
+            if (!IsPlaying)
+            {
+                Start();
+            }
+            
+            float simulationTime = time % Behaviour.GetDuration();
+            float progress = Behaviour.GetElapsed();
+
+            while (simulationTime > 0)
+            {
+                Tick(simulationTime);
+
+                float newProgress = Behaviour.GetElapsed();
+                float tickElapsed = newProgress - progress;
+                progress = newProgress;
+
+                simulationTime -= tickElapsed;
+            }
+            
+            return this;
         }
         
         /// <summary>
@@ -219,15 +255,30 @@ namespace GTweens.Tweens
         {
             if(!IsPlaying && !IsCompleted)
             {
-                return 0.0f;
+                return 0f;
             }
-
+            
             if(!IsPlaying && IsCompleted)
             {
                 return GetDuration();
             }
 
             return Behaviour.GetElapsed();
+        }
+
+        public float GetRemaining()
+        {
+            if(!IsPlaying && !IsCompleted)
+            {
+                return GetDuration();
+            }
+            
+            if(!IsPlaying && IsCompleted)
+            {
+                return 0f;
+            }
+            
+            return Behaviour.GetRemaining();
         }
         
         public GTween OnStart(Action action)

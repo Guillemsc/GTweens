@@ -26,7 +26,7 @@ namespace GTweens.TweenBehaviours
             for (int i = _playingTweens.Count - 1; i >= 0; --i)
             {
                 GTween gTween = _playingTweens[i];
-
+                    
                 gTween.Tick(deltaTime);
 
                 if (!gTween.IsPlaying)

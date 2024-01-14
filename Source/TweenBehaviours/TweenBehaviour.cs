@@ -1,4 +1,5 @@
-﻿using GTweens.Easings;
+﻿using System;
+using GTweens.Easings;
 using GTweens.Enums;
 
 namespace GTweens.TweenBehaviours;
@@ -11,6 +12,14 @@ public abstract class TweenBehaviour : ITweenBehaviour
 
     protected void MarkFinished() => _finished = true;
     protected void MarkUnfinished() => _finished = false;
+    
+    public float GetRemaining()
+    {
+        float duration = GetDuration();
+        float elapsed = GetElapsed();
+
+        return Math.Max(duration - elapsed, 0f);
+    }
     
     public abstract float GetDuration();
     public abstract float GetElapsed();

@@ -24,7 +24,7 @@ namespace GTweens.TweenBehaviours
             for (int i = _playingTweeners.Count - 1; i >= 0; --i)
             {
                 ITweener tweener = _playingTweeners[i];
-
+                    
                 tweener.Tick(deltaTime);
 
                 if (!tweener.IsPlaying)
