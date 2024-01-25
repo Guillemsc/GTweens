@@ -1,5 +1,4 @@
 ﻿using System;
-using Game.GameContext.Pause.Datas;
 using GTweens.Easings;
 using GTweens.Enums;
 using GTweens.TweenBehaviours;
@@ -103,9 +102,10 @@ namespace GTweens.Tweens
             }
         }
 
-        public void SetPaused(bool paused)
+        public GTween SetPaused(bool paused)
         {
             IsPaused = paused;
+            return this;
         }
 
         /// <summary>
@@ -150,7 +150,8 @@ namespace GTweens.Tweens
         /// </summary>
         /// <param name="kill">Whether to kill the tween.</param>
         /// <param name="resetMode">The reset mode to use.</param>
-        public void Reset(bool kill, ResetMode resetMode = ResetMode.InitialValues)
+        /// <returns>The current GTween instance for method chaining.</returns>
+        public GTween Reset(bool kill, ResetMode resetMode = ResetMode.InitialValues)
         {
             if (kill)
             {
@@ -164,16 +165,28 @@ namespace GTweens.Tweens
             Behaviour.Reset(kill, resetMode);
 
             OnResetAction?.Invoke();
+
+            return this;
         }
 
+        /// <summary>
+        /// Simulates the progress of a GTween animation for a specified duration.
+        /// </summary>
+        /// <param name="time">The simulated time in seconds.</param>
+        /// <returns>The current GTween instance for method chaining.</returns>
         public GTween Simulate(float time)
         {
             if (!IsPlaying)
             {
                 Start();
             }
+
+            bool loops = Loops > 0;
+
+            float simulationTime = loops ? 
+                time % Behaviour.GetDuration() : 
+                Math.Min(time, Behaviour.GetDuration());
             
-            float simulationTime = time % Behaviour.GetDuration();
             float progress = Behaviour.GetElapsed();
 
             while (simulationTime > 0)
@@ -194,7 +207,7 @@ namespace GTweens.Tweens
         /// Sets the time scale for the tween, affecting its speed.
         /// </summary>
         /// <param name="timeScale">The time scale to set.</param>
-        /// <returns>The current instance of the builder.</returns>
+        /// <returns>The current GTween instance for method chaining.</returns>
         public GTween SetTimeScale(float timeScale)
         {
             TimeScale = timeScale;
@@ -206,7 +219,7 @@ namespace GTweens.Tweens
         /// Sets the easing function for the tween.
         /// </summary>
         /// <param name="easingFunction">The custom easing function to use.</param>
-        /// <returns>The current instance of the builder.</returns>
+        /// <returns>The current GTween instance for method chaining.</returns>
         public GTween SetEasing(EasingDelegate easingFunction)
         {
             Behaviour.SetEasing(easingFunction);
@@ -217,7 +230,7 @@ namespace GTweens.Tweens
         /// Sets the predefined easing function for the tween.
         /// </summary>
         /// <param name="easing">The predefined easing to use.</param>
-        /// <returns>The current instance of the builder.</returns>
+        /// <returns>The current GTween instance for method chaining.</returns>
         public GTween SetEasing(Easing easing)
         {
             return SetEasing(PresetEasingDelegateFactory.GetEaseDelegate(easing));
@@ -228,7 +241,7 @@ namespace GTweens.Tweens
         /// </summary>
         /// <param name="loops">The number of loops.</param>
         /// <param name="resetMode">The reset mode to use when looping.</param>
-        /// <returns>The current instance of the builder.</returns>
+        /// <returns>The current GTween instance for method chaining.</returns>
         public GTween SetLoops(int loops, ResetMode resetMode = ResetMode.InitialValues)
         {
             Loops = Math.Max(loops, 0);
@@ -240,17 +253,23 @@ namespace GTweens.Tweens
         /// Sets the tween to have and almost infinite amount of loops with the specified reset mode.
         /// </summary>
         /// <param name="resetMode">The reset mode to use when looping.</param>
-        /// <returns>The current instance of the builder.</returns>
+        /// <returns>The current GTween instance for method chaining.</returns>
         public GTween SetMaxLoops(ResetMode resetMode = ResetMode.InitialValues)
         {
             return SetLoops(int.MaxValue, resetMode);
         }
         
+        /// <summary>
+        /// Calculates the total duration of the tween.
+        /// </summary>
         public float GetDuration()
         {
             return Behaviour.GetDuration();
         }
 
+        /// <summary>
+        /// Calculates the time elapsed since the tween started playing.
+        /// </summary>
         public float GetElapsed()
         {
             if(!IsPlaying && !IsCompleted)
@@ -266,6 +285,9 @@ namespace GTweens.Tweens
             return Behaviour.GetElapsed();
         }
 
+        /// <summary>
+        /// Gets the time left remaining on the tween (duration - elapsed).
+        /// </summary>
         public float GetRemaining()
         {
             if(!IsPlaying && !IsCompleted)

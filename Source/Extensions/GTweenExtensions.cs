@@ -261,6 +261,15 @@ namespace GTweens.Extensions
             return gTween.IsPlaying || gTween.IsCompleted || gTween.IsNested;
         }
         
+        /// <summary>
+        /// Asynchronously waits for the completion of a GTween animation or cancellation through a CancellationToken.
+        /// </summary>
+        /// <param name="gTween">The GTween instance to monitor for completion.</param>
+        /// <param name="cancellationToken">The CancellationToken that can be used to cancel the operation.</param>
+        /// <returns>
+        /// A Task that represents the asynchronous operation. The Task completes when the GTween animation is complete,
+        /// or when the CancellationToken is signaled for cancellation.
+        /// </returns>
         public static Task AwaitCompleteOrKill(this GTween gTween, CancellationToken cancellationToken)
         {
             TaskCompletionSource taskCompletionSource = new();
