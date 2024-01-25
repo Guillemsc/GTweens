@@ -102,6 +102,10 @@ namespace GTweens.Tweens
             }
         }
 
+        /// <summary>
+        /// Sets if the tween can continue updating or not. Has effect even if the tween has not startet playing.
+        /// If you start a paused tween, it will not update until it's unpaused.
+        /// </summary>
         public GTween SetPaused(bool paused)
         {
             IsPaused = paused;
