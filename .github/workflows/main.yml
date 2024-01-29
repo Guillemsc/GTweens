@@ -27,7 +27,7 @@ jobs:
 
     - name: Create C# project
       run: |
-        dotnet new nunit -n GTweens --no-restore
+        dotnet new nunit -n GTweens 
         cd GTweens
         # Remove the default test file (UnitTest1.cs)
         rm UnitTest1.cs
@@ -55,5 +55,5 @@ jobs:
     - name: Test
       run: |
         cd GTweens
-        dotnet test GTweens.csproj --configuration Release --no-restore /p:DefineConstants=GTWEENS_TESTS --verbosity detailed
+        dotnet test GTweens.csproj --configuration Release --no-restore /p:DefineConstants=GTWEENS_TESTS 
         cd ..
