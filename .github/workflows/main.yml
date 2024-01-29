@@ -57,4 +57,7 @@ jobs:
         cd ..
 
     - name: Test
-      run: dotnet test GTweens.csproj --configuration Release --no-restore
+      run: |
+        cd GTweens
+        dotnet test GTweens.csproj --configuration Release --no-restore
+        cd ..
