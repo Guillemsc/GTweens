@@ -29,6 +29,8 @@ jobs:
       run: |
         dotnet new nunit -n GTweens --no-restore
         cd GTweens
+        # Remove the default test file (UnitTest1.cs)
+        rm UnitTest1.cs
 
     - name: Log Folder Structure
       run: |
