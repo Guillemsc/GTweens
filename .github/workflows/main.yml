@@ -51,7 +51,10 @@ jobs:
         cd ..
 
     - name: Build
-      run: dotnet build GTweens.csproj --configuration Release
+      run: |
+        cd GTweens
+        dotnet build GTweens.csproj --configuration Release
+        cd ..
 
     - name: Test
       run: dotnet test GTweens.csproj --configuration Release --no-restore
