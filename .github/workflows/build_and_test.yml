@@ -15,11 +15,6 @@ jobs:
       with:
         path: repo/
 
-    - name: Log Folder Structure
-      run: |
-        echo "Folder structure:"
-        ls -R
-
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -32,19 +27,9 @@ jobs:
         # Remove the default test file (UnitTest1.cs)
         rm UnitTest1.cs
 
-    - name: Log Folder Structure
-      run: |
-        echo "Folder structure:"
-        ls -R
-
     - name: Copy repository contents to project
       run: |
         cp -r repo/* GTweens/
-
-    - name: Log Folder Structure
-      run: |
-        echo "Folder structure:"
-        ls -R
 
     - name: Build
       run: |
