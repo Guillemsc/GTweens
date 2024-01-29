@@ -37,7 +37,7 @@ jobs:
 
     - name: Copy repository contents to project
       run: |
-        cp -r repo/. GTweens/
+        cp -r repo/* GTweens/
 
     - name: Log Folder Structure
       run: |
