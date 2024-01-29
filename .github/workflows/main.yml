@@ -37,7 +37,12 @@ jobs:
 
     - name: Copy repository contents to project
       run: |
-        cp -r ../. .
+        cp -r repo/. GTweens/
+
+    - name: Log Folder Structure
+      run: |
+        echo "Folder structure:"
+        ls -R
 
     - name: Add NUnit
       run: dotnet add package NUnit
