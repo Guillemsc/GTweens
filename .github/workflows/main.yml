@@ -27,7 +27,7 @@ jobs:
 
     - name: Create C# project
       run: |
-        dotnet new nunit -n GTweens
+        dotnet new nunit -n GTweens --no-restore
         cd GTweens
 
     - name: Log Folder Structure
