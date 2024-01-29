@@ -16,7 +16,16 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '6.0.x'  # or specify the version you want
+        dotnet-version: '6.0.x' 
+
+    - name: Create C# project
+      run: |
+        dotnet new console -n GTweens
+        cd GTweens
+
+    - name: Copy repository contents to project
+      run: |
+        cp -r ../. .
 
     - name: Add NUnit
       run: dotnet add package NUnit
