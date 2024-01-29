@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/release/Guillemsc/GTweens.svg)](https://github.com/Guillemsc/GTweens/releases/latest)
 [![NuGet](https://img.shields.io/nuget/v/GTweens.svg?label=nuget)](https://www.nuget.org/packages/GTweens)
 [![Downloads](https://img.shields.io/nuget/dt/GTweens)](https://www.nuget.org/packages/GTweens)
-[![Build and Tests](https://github.com/Guillemsc/GTweens/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/Guillemsc/GTweens/actions/workflows/build_and_test.yml)
+[![Tests](https://github.com/Guillemsc/GTweens/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/Guillemsc/GTweens/actions/workflows/build_and_test.yml)
 [![Twitter Follow](https://img.shields.io/badge/twitter-%406uillem-blue.svg?style=flat&label=Follow)](https://twitter.com/6uillem)
 
 ![LogoWide-2](https://github.com/Guillemsc/GTweens/assets/17142208/ffeede41-5f4a-456f-8cd1-b74e2a26710a)
