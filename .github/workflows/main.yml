@@ -53,11 +53,11 @@ jobs:
     - name: Build
       run: |
         cd GTweens
-        dotnet build GTweens.csproj --configuration Release
+        dotnet build GTweens.csproj --configuration Release -define GTWEENS_TESTS
         cd ..
 
     - name: Test
       run: |
         cd GTweens
-        dotnet test GTweens.csproj --configuration Release --no-restore
+        dotnet test GTweens.csproj --configuration Release -define GTWEENS_TESTS --no-restore 
         cd ..
