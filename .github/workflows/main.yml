@@ -59,5 +59,7 @@ jobs:
     - name: Test
       run: |
         cd GTweens
-        dotnet test GTweens.csproj --configuration Release --no-restore /p:DefineConstants=GTWEENS_TESTS
+        dotnet test GTweens.csproj --configuration Release --no-restore /p:DefineConstants=GTWEENS_TESTS | tee test-results.txt
+        echo "Test Results:"
+        cat test-results.txt
         cd ..
