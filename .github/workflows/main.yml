@@ -44,12 +44,6 @@ jobs:
         echo "Folder structure:"
         ls -R
 
-    - name: Add NUnit
-      run: |
-        cd GTweens
-        dotnet add package NUnit
-        cd ..
-
     - name: Build
       run: |
         cd GTweens
