@@ -48,6 +48,7 @@ jobs:
       run: |
         cd GTweens
         dotnet add package NUnit
+        cd ..
 
     - name: Build
       run: dotnet build GTweens.csproj --configuration Release
