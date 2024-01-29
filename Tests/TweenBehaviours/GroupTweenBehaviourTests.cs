@@ -22,7 +22,7 @@ public sealed class GroupTweenBehaviourTests
         tween.Start();
         tween.Tick(4);
         
-        Assert.That(tween.IsPlaying);
+        Assert.That(!tween.IsPlaying);
         Assert.That(tween.IsCompleted);
     }
     
@@ -40,7 +40,7 @@ public sealed class GroupTweenBehaviourTests
         tween.Tick(2);
         
         Assert.That(tween.IsPlaying);
-        Assert.That(tween.IsCompleted);
+        Assert.That(!tween.IsCompleted);
     }
     
     GTween CreateTweenWithDuration(float duration)
