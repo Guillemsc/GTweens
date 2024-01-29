@@ -45,7 +45,9 @@ jobs:
         ls -R
 
     - name: Add NUnit
-      run: dotnet add package NUnit
+      run: |
+        cd GTweens
+        dotnet add package NUnit
 
     - name: Build
       run: dotnet build --configuration Release
