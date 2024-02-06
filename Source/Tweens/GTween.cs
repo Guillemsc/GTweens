@@ -209,6 +209,8 @@ namespace GTweens.Tweens
         
         /// <summary>
         /// Sets the time scale for the tween, affecting its speed.
+        /// By default time scale is 1.0f. If you decrease this number, the tween
+        /// will update slower. If you increase it, the tween will update faster.
         /// </summary>
         /// <param name="timeScale">The time scale to set.</param>
         /// <returns>The current GTween instance for method chaining.</returns>
