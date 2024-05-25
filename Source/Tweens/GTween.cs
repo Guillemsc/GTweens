@@ -11,6 +11,7 @@ namespace GTweens.Tweens
     public sealed class GTween 
     {
         public event Action? OnStartAction;
+        public event Action? OnTickAction;
         public event Action? OnLoopAction;
         public event Action? OnResetAction;
         public event Action? OnCompleteAction;
@@ -20,6 +21,8 @@ namespace GTweens.Tweens
         
         public ITweenBehaviour Behaviour { get; }
         public float TimeScale { get; private set; } = 1;
+        
+        public float Delay { get; private set; } 
 
         public int Loops { get; private set; }
         public ResetMode LoopResetMode { get; private set; }
@@ -33,7 +36,8 @@ namespace GTweens.Tweens
         public bool IsCompletedOrKilled => IsCompleted || IsKilled;
 
         public bool IsAlive { get; set; }
-        
+
+        float _delayRemaining;
         int _loopsRemaining;
 
         public GTween(ITweenBehaviour behaviour)
@@ -56,6 +60,7 @@ namespace GTweens.Tweens
             IsCompleted = false;
             IsKilled = false;
 
+            _delayRemaining = Delay;
             _loopsRemaining = Loops;
 
             Behaviour.Start(isCompletingInstantly);
@@ -80,8 +85,16 @@ namespace GTweens.Tweens
             }
 
             float deltaTimeWithTimeScale = TimeScale * deltaTime;
+
+            if (_delayRemaining > 0f)
+            {
+                _delayRemaining -= deltaTime;
+                return;
+            }
             
             Behaviour.Tick(deltaTimeWithTimeScale);
+            
+            OnTickAction?.Invoke();
 
             bool isFinished = Behaviour.GetFinished();
 
@@ -166,6 +179,8 @@ namespace GTweens.Tweens
             IsCompleted = false;
             IsKilled = false;
 
+            _delayRemaining = Delay;
+
             Behaviour.Reset(kill, resetMode);
 
             OnResetAction?.Invoke();
@@ -204,6 +219,15 @@ namespace GTweens.Tweens
                 simulationTime -= tickElapsed;
             }
             
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds some delay (in seconds) at the begining of the tween.
+        /// </summary>
+        public GTween SetDelay(float delaySeconds)
+        {
+            Delay = delaySeconds;
             return this;
         }
         
@@ -312,6 +336,12 @@ namespace GTweens.Tweens
         public GTween OnStart(Action action)
         {
             OnStartAction += action;
+            return this;
+        }
+        
+        public GTween OnTick(Action action)
+        {
+            OnTickAction += action;
             return this;
         }
         

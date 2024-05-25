@@ -208,7 +208,6 @@ namespace GTweens.Extensions
             float duration
         ) => Tween(getter, setter, to, duration, ValidationExtensions.AlwaysValid);
         
-        
         public static GTween Tween(
             int from, 
             int to, 
