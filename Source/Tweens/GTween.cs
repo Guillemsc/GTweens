@@ -48,7 +48,7 @@ namespace GTweens.Tweens
         /// <summary>
         /// Starts the tween.
         /// </summary>
-        /// <param name="isCompletingInstantly">Determines if the tween should complete instantly.</param>
+        /// <param name="isCompletingInstantly">Determines if the tween that's being started, should also complete instantly.</param>
         public void Start(bool isCompletingInstantly = false)
         {
             if (IsPlaying)
